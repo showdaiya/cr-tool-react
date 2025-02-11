@@ -1,26 +1,28 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-//import './App.css'
 import { Box } from '@chakra-ui/react';
-import CardBattle from './components/demo';
+import CardBattle from './pages/CardBattlePage';
+import Header from './components/Header';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme/chakraTheme';
+import { CardProvider } from './contexts/CardContext';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box
-        width={'100vw'}
-        minHeight={'100vh'}
-        mx="auto"
-        display="flex"
-        alignItems="flex-start"
-        justifyContent="center"
-        overflow="auto"
-      >
-        <CardBattle />
-      </Box>
+      <CardProvider>
+        <Box
+          width={'100vw'}
+          minHeight={'100vh'}
+          mx="auto"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="flex-start"
+          overflow="auto"
+        >
+          <Header />
+          <CardBattle />
+        </Box>
+      </CardProvider>
     </ChakraProvider>
   );
 }

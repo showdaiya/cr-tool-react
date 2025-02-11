@@ -16,7 +16,7 @@ export const StatusIndicator = ({
   return (
     <Flex align="center">
       <Circle size="2" bg={color} mr={2} />
-      <Text color={textColor}>{label}: {value}</Text>
+      <Text fontSize={"md"} color={textColor}>{label}: {value}</Text>
     </Flex>
   );
 };

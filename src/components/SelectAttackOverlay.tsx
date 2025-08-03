@@ -130,7 +130,7 @@ export const SelectAttackOverlay: FC<SelectAttackOverlayProps> = memo(
                     type="number"
                     value={inputAttackNum}
                     min={0}
-                    max={1000}
+                    max={100} // Limit attack number to 100 to match validation below
                     onChange={e => {
                       const newValue = parseInt(e.target.value);
                       if (newValue <= 0) {

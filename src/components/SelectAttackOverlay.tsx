@@ -25,7 +25,7 @@ export const SelectAttackOverlay: FC<SelectAttackOverlayProps> = memo(
   ({ attackCardIndex, isOpen, onClose }) => {
     const troopData = useTroops();
     const spellData = useSpells();
-    const [attackCards] = useAttackCards();
+    const [attackCards, setAttackCards] = useAttackCards();
 
     const attackCard = attackCards[attackCardIndex];
     const displayCardKey = attackCard.CardKey ? attackCard.CardKey : 'Knight';
@@ -54,11 +54,14 @@ export const SelectAttackOverlay: FC<SelectAttackOverlayProps> = memo(
     };
 
     const handleOnClose = () => {
-      attackCards[attackCardIndex] = {
-        CardKey: inputCardKey,
-        Type: inputType,
-        AttackNumber: inputAttackNum,
-      };
+      setAttackCards({
+        ...attackCards,
+        [attackCardIndex]: {
+          CardKey: inputCardKey,
+          Type: inputType,
+          AttackNumber: inputAttackNum,
+        },
+      });
       onClose();
     };
 

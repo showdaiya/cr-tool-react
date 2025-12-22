@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, memo } from 'react';
+import { ChangeEvent, FC, memo, useRef } from 'react';
 import { useTroops, useSpells, useAttackCards } from '../contexts/CardContext';
 import {
   Modal,
@@ -26,6 +26,7 @@ export const SelectAttackOverlay: FC<SelectAttackOverlayProps> = memo(
     const troopData = useTroops();
     const spellData = useSpells();
     const [attackCards, setAttackCards] = useAttackCards();
+    const initialFocusRef = useRef(null);
 
     const attackCard = attackCards[attackCardIndex];
     const displayCardKey = attackCard.CardKey ? attackCard.CardKey : 'Knight';
@@ -66,7 +67,7 @@ export const SelectAttackOverlay: FC<SelectAttackOverlayProps> = memo(
     };
 
     return (
-      <Modal isOpen={isOpen} onClose={handleOnClose} isCentered motionPreset="slideInBottom">
+      <Modal isOpen={isOpen} onClose={handleOnClose} isCentered motionPreset="slideInBottom" initialFocusRef={initialFocusRef}>
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
         <ModalContent
           w={['90%', '80%']}
@@ -83,7 +84,7 @@ export const SelectAttackOverlay: FC<SelectAttackOverlayProps> = memo(
           position="relative" // 追加
           overflow="hidden" // 追加
         >
-          <ModalHeader />
+          <ModalHeader ref={initialFocusRef} />
           <ModalCloseButton size="lg" zIndex={2} />
           <ModalBody
             display="flex"

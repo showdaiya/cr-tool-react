@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, memo } from 'react';
+import { ChangeEvent, FC, memo, useRef } from 'react';
 import { useTroops, useDefenseCard } from '../contexts/CardContext';
 import {
   Modal,
@@ -19,6 +19,7 @@ interface SelectDefenceOverlayProps {
 export const SelectDefenceOverlay: FC<SelectDefenceOverlayProps> = memo(({ isOpen, onClose }) => {
   const troopData = useTroops();
   const [defenseCard, setDefenseCard] = useDefenseCard();
+  const initialFocusRef = useRef(null);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const cardKey = event.target.value;
@@ -28,7 +29,7 @@ export const SelectDefenceOverlay: FC<SelectDefenceOverlayProps> = memo(({ isOpe
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="slideInBottom">
+    <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="slideInBottom" initialFocusRef={initialFocusRef}>
       <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
       <ModalContent
         w={['90%', '80%']}
@@ -45,7 +46,7 @@ export const SelectDefenceOverlay: FC<SelectDefenceOverlayProps> = memo(({ isOpe
         position="relative" // 追加
         overflow="hidden" // 追加
       >
-        <ModalHeader />
+        <ModalHeader ref={initialFocusRef} />
         <ModalCloseButton size="lg" zIndex={2} />
         <ModalBody
           display="flex"
